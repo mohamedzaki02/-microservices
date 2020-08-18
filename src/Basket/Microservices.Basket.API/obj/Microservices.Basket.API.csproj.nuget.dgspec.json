@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Catalog\\Microservices.Catalog.API\\Microservices.Catalog.API.csproj": {}
+    "C:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Basket\\Microservices.Basket.API\\Microservices.Basket.API.csproj": {}
   },
   "projects": {
-    "c:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Catalog\\Microservices.Catalog.API\\Microservices.Catalog.API.csproj": {
+    "C:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Basket\\Microservices.Basket.API\\Microservices.Basket.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Catalog\\Microservices.Catalog.API\\Microservices.Catalog.API.csproj",
-        "projectName": "Microservices.Catalog.API",
-        "projectPath": "c:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Catalog\\Microservices.Catalog.API\\Microservices.Catalog.API.csproj",
+        "projectUniqueName": "C:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Basket\\Microservices.Basket.API\\Microservices.Basket.API.csproj",
+        "projectName": "Microservices.Basket.API",
+        "projectPath": "C:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Basket\\Microservices.Basket.API\\Microservices.Basket.API.csproj",
         "packagesPath": "C:\\Users\\ITG\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Catalog\\Microservices.Catalog.API\\obj\\",
+        "outputPath": "C:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Basket\\Microservices.Basket.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ITG\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -38,9 +38,13 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "MongoDB.Driver": {
+            "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[2.11.0, )"
+              "version": "[12.0.3, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.1.58, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

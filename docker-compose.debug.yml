@@ -2,7 +2,6 @@
 version: "3.4"
 
 services:
-
   catalogdb:
     container_name: catalogdb
     restart: always
@@ -10,6 +9,12 @@ services:
       - ${WEBAPP_STORAGE_HOME}/site:/data/db
     ports:
       - "27017:27017"
+
+  basketdb:
+    container_name: basketdb
+    restart: always
+    ports:
+      - "6379:6379"
 
   catalog.api:
     image: catalog.api
@@ -25,6 +30,22 @@ services:
       - "CatalogDbSettings:ConnectionString=mongodb://catalogdb:27017"
       - "CatalogDbSettings:DatabaseName=CatalogDb"
       - "CatalogDbSettings:CollectionName=Products"
+      - ASPNETCORE_URLS=http://+:80
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
+
+  basket.api:
+    image: basket.api
+    build:
+      context: .
+      dockerfile: src/Basket/Microservices.Basket.API/Dockerfile
+    ports:
+      - "8081:80"
+    depends_on:
+      - basketdb
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionString:RedisConnection=basketdb:6379"
       - ASPNETCORE_URLS=http://+:80
     volumes:
       - ~/.vsdbg:/remote_debugger:rw

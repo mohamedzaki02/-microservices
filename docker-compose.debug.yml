@@ -16,6 +16,13 @@ services:
     ports:
       - "6379:6379"
 
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "8082:15672"
+
   catalog.api:
     image: catalog.api
     build:
@@ -43,9 +50,13 @@ services:
       - "8081:80"
     depends_on:
       - basketdb
+      - rabbitmq
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionString:RedisConnection=basketdb:6379"
+      - "ConnectionStrings:RedisConnection=basketdb:6379"
+      - "EventBus:HostName=rabbitmq"
+      - "EventBus:UserName=guest"
+      - "EventBus:Password=guest"
       - ASPNETCORE_URLS=http://+:80
     volumes:
       - ~/.vsdbg:/remote_debugger:rw

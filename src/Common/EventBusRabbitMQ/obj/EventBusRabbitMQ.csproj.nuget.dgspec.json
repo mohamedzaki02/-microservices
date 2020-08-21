@@ -1,31 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Catalog\\Microservices.Catalog.API\\Microservices.Catalog.API.csproj": {}
+    "C:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Common\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Catalog\\Microservices.Catalog.API\\Microservices.Catalog.API.csproj": {
+    "C:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Common\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Catalog\\Microservices.Catalog.API\\Microservices.Catalog.API.csproj",
-        "projectName": "Microservices.Catalog.API",
-        "projectPath": "C:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Catalog\\Microservices.Catalog.API\\Microservices.Catalog.API.csproj",
+        "projectUniqueName": "C:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Common\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
+        "projectName": "EventBusRabbitMQ",
+        "projectPath": "C:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Common\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
         "packagesPath": "C:\\Users\\ITG\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Catalog\\Microservices.Catalog.API\\obj\\",
+        "outputPath": "C:\\Users\\ITG\\Desktop\\CsProjects\\10\\src\\Common\\EventBusRabbitMQ\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ITG\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "netstandard2.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "netstandard2.0": {
             "projectReferences": {}
           }
         },
@@ -36,15 +36,21 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "netstandard2.0": {
           "dependencies": {
-            "MongoDB.Driver": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[2.11.0, )"
+              "version": "[2.0.3, )",
+              "autoReferenced": true
             },
-            "Swashbuckle.AspNetCore": {
+            "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[5.5.1, )"
+              "version": "[12.0.3, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.2.1, )"
             }
           },
           "imports": [
@@ -57,14 +63,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }

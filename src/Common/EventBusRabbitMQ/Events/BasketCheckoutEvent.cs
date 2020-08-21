@@ -1,7 +1,10 @@
-namespace Microservices.Basket.API.Entities
+using System;
+
+namespace EventBusRabbitMQ.Events
 {
-    public class BasketCheckout
+    public class BasketCheckoutEvent
     {
+        public Guid RequestId { get; set; }
         public string UserName { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
@@ -11,6 +14,4 @@ namespace Microservices.Basket.API.Entities
         public int CVV { get; set; }
         public decimal TotalPrice { get; set; }
     }
-
-
 }

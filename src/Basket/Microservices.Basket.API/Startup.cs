@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using EventBusRabbitMQ;
+using EventBusRabbitMQ.Producers;
 using Microservices.Basket.API.Data;
 using Microservices.Basket.API.Data.Interfaces;
 using Microservices.Basket.API.Repositories;
@@ -14,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RabbitMQ.Client;
 using StackExchange.Redis;
 
 namespace Microservices.Basket.API
@@ -31,14 +35,28 @@ namespace Microservices.Basket.API
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddSingleton<ConnectionMultiplexer>(sp =>
             {
                 var redis_config = ConfigurationOptions.Parse(Configuration.GetConnectionString("RedisConnection"), true);
                 return ConnectionMultiplexer.Connect(redis_config);
             });
 
+            services.AddSingleton<IRabbitMQConnection>(sp =>
+            {
+                var factory = new ConnectionFactory() { HostName = Configuration["EventBus:HostName"] };
+                var username = Configuration["EventBus:UserName"];
+                var password = Configuration["EventBus:Password"];
+                if (!string.IsNullOrEmpty(username)) factory.UserName = username;
+                if (!string.IsNullOrEmpty(password)) factory.Password = password;
+                return new RabbitMQConnection(factory);
+            });
+
             services.AddScoped<IBasketContext, BasketContext>();
             services.AddScoped<IBasketRepository, BasketRepository>();
+
+            services.AddSingleton<RabbitMQProducer>();
 
             services.AddControllers();
 

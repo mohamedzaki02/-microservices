@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="8.1.0" />
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="FluentValidation" Version="9.1.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Microservices.Orders.Core\Microservices.Orders.Core.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Microservices.Orders.Infra\Microservices.Orders.Infra.csproj" />
+  </ItemGroup>
+</Project>

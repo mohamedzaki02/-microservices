@@ -18,6 +18,8 @@ namespace Microservices.Orders.Application.CommandHandlers
             _repo = repo;
 
         }
+
+        // JUST FOR TESTING BEFORE CREATING & REGISTERING RabbitMQ Listener
         public async Task<OrderResponse> Handle(BasketCheckoutCommand request, CancellationToken cancellationToken)
         {
             var order = OrderMapper.Mapper.Map<Order>(request);

@@ -16,6 +16,14 @@ services:
     ports:
       - "6379:6379"
 
+  ordersdb:
+    container_name: ordersdb
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "SwN12345678"
+      ACCEPT_EULA: "Y"
+
   rabbitmq:
     container_name: rabbitmq
     restart: always
@@ -54,6 +62,27 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings:RedisConnection=basketdb:6379"
+      - "EventBus:HostName=rabbitmq"
+      - "EventBus:UserName=guest"
+      - "EventBus:Password=guest"
+      - ASPNETCORE_URLS=http://+:80
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
+
+  orders.api:
+    image: orders.api
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: src/Orders/API/Microservices.Orders.API/Dockerfile
+    ports:
+      - "8083:80"
+    depends_on:
+      - ordersdb
+      - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:OrdersConnection=Server=ordersdb;Database=OrdersDb;User Id=sa;Password=SwN12345678"
       - "EventBus:HostName=rabbitmq"
       - "EventBus:UserName=guest"
       - "EventBus:Password=guest"

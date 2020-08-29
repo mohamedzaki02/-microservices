@@ -21,7 +21,7 @@ services:
       dockerfile: src/Catalog/Microservices.Catalog.API/Dockerfile
 
   basket.api:
-    image: catalog.api
+    image: basket.api
     build:
       context: .
       dockerfile: src/Basket/Microservices.Basket.API/Dockerfile
@@ -31,3 +31,9 @@ services:
     build:
       context: .
       dockerfile: src/Orders/API/Microservices.Orders.API/Dockerfile
+
+  ocelot.gateway:
+    image: ocelot.gateway
+    build:
+      context: .
+      dockerfile: src/ApiGateway/Microservices.Ocelot.ApiGateway/Dockerfile

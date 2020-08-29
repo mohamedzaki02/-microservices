@@ -32,10 +32,7 @@ services:
       - "8082:15672"
 
   catalog.api:
-    image: catalog.api
-    build:
-      context: .
-      dockerfile: src/Catalog/Microservices.Catalog.API/Dockerfile
+    container_name: catalogapi
     ports:
       - "8080:80"
     depends_on:
@@ -46,14 +43,9 @@ services:
       - "CatalogDbSettings:DatabaseName=CatalogDb"
       - "CatalogDbSettings:CollectionName=Products"
       - ASPNETCORE_URLS=http://+:80
-    volumes:
-      - ~/.vsdbg:/remote_debugger:rw
 
   basket.api:
-    image: basket.api
-    build:
-      context: .
-      dockerfile: src/Basket/Microservices.Basket.API/Dockerfile
+    container_name: basketapi
     ports:
       - "8081:80"
     depends_on:
@@ -66,15 +58,10 @@ services:
       - "EventBus:UserName=guest"
       - "EventBus:Password=guest"
       - ASPNETCORE_URLS=http://+:80
-    volumes:
-      - ~/.vsdbg:/remote_debugger:rw
 
   orders.api:
-    image: orders.api
+    container_name: ordersapi
     restart: on-failure
-    build:
-      context: .
-      dockerfile: src/Orders/API/Microservices.Orders.API/Dockerfile
     ports:
       - "8083:80"
     depends_on:
@@ -87,5 +74,14 @@ services:
       - "EventBus:UserName=guest"
       - "EventBus:Password=guest"
       - ASPNETCORE_URLS=http://+:80
-    volumes:
-      - ~/.vsdbg:/remote_debugger:rw
+
+  ocelot.gateway:
+    container_name: ocelotgateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - catalog.api
+      - basket.api
+      - orders.api
+    ports:
+      - "8878:80"
